@@ -11,7 +11,9 @@ app = Flask(__name__)
 def search(query: str):
     soup = BeautifulSoup(
         requests.get(
-            "https://annas-archive.org/search", params={"q": query}, timeout=5
+            "https://annas-archive.org/search",
+            params={"q": query, "sort": "newest_added"},
+            timeout=5,
         ).text,
         features="lxml",
     )
@@ -29,7 +31,7 @@ def search(query: str):
                 "h-[125] flex flex-col justify-center js-scroll-hidden",
             ],
         },
-    ):
+    )[::-1]:
         contents = entry.encode_contents().decode().strip()
 
         # Uncomment hidden entries
