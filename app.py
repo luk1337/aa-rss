@@ -44,3 +44,7 @@ def search(query: str):
         feed_entry.link(href=f"https://annas-archive.org/md5/{md5}")
 
     return feed.rss_str(pretty=True)
+
+
+if __name__ == "__main__":
+    app.run()
