@@ -27,7 +27,7 @@ def search(query: str):
             "class": [
                 "h-[125] flex flex-col justify-center",
                 "h-[125] flex flex-col justify-center js-scroll-hidden",
-            ]
+            ],
         },
     ):
         contents = entry.encode_contents().decode().strip()
