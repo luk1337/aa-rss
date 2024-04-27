@@ -45,7 +45,7 @@ def search(query: str):
         md5 = entry.find("a").attrs["href"].split("/")[-1]
 
         feed_entry = feed.add_entry()
-        feed_entry.id(md5)
+        feed_entry.id(str(hash(query + md5)))
         feed_entry.title(f"{entry.find('h3').text} ({md5})")
         feed_entry.link(href=f"https://annas-archive.org/md5/{md5}")
 
