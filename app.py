@@ -32,6 +32,10 @@ def search(query: str):
             ],
         },
     )[::-1]:
+        # Hide partial matches
+        if "overflow-hidden" in entry.find_parent("div").attrs["class"]:
+            continue
+
         contents = entry.encode_contents().decode().strip()
 
         # Uncomment hidden entries
