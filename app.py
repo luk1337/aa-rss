@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import hashlib
+import http
 
 import requests
 from bs4 import BeautifulSoup
@@ -17,7 +18,7 @@ def search(query: str):
         timeout=5,
     )
 
-    if req.status_code != 200:
+    if req.status_code != http.HTTPStatus.OK:
         return req.text, req.status_code
 
     soup = BeautifulSoup(req.text, features="lxml")
