@@ -9,18 +9,16 @@ app = Flask(__name__)
 
 @app.route("/search/<query>")
 def search(query: str):
-    soup = BeautifulSoup(
-        requests.get(
-            "https://annas-archive.org/search",
-            params={"q": query, "sort": "newest_added"},
-            timeout=5,
-        ).text,
-        features="lxml",
+    req = requests.get(
+        "https://annas-archive.org/search",
+        params={"q": query, "sort": "newest_added"},
+        timeout=5,
     )
+    soup = BeautifulSoup(req.text, features="lxml")
 
     feed = FeedGenerator()
     feed.title(f"Anna's Archive Search: {query}")
-    feed.link(href=f"https://annas-archive.org/search?q={query}", rel="self")
+    feed.link(href=req.url, rel="self")
     feed.description(f"Search results for: {query}")
 
     for entry in soup.find_all(
