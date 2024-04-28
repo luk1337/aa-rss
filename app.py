@@ -35,7 +35,7 @@ def search(query: str):
         },
     )[::-1]:
         # Hide partial matches
-        if "overflow-hidden" in entry.find_parent("div").attrs["class"]:
+        if "overflow-hidden" in entry.find_parent("div")["class"]:
             continue
 
         contents = entry.encode_contents().decode().strip()
@@ -44,7 +44,7 @@ def search(query: str):
         if contents.startswith("<!--") and contents.endswith("-->"):
             entry = BeautifulSoup(contents[4:-3], features="lxml")
 
-        md5 = entry.find("a").attrs["href"].split("/")[-1]
+        md5 = entry.find("a")["href"].split("/")[-1]
 
         feed_entry = feed.add_entry()
         feed_entry.id(str(hash(query + md5)))
