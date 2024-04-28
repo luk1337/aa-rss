@@ -14,6 +14,10 @@ def search(query: str):
         params={"q": query, "sort": "newest_added"},
         timeout=5,
     )
+
+    if req.status_code != 200:
+        return req.text, req.status_code
+
     soup = BeautifulSoup(req.text, features="lxml")
 
     feed = FeedGenerator()
